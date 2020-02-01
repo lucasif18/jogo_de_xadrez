@@ -2,6 +2,8 @@ package chess;
 
 		//regras do jogo
 import bordgame.Board;
+import bordgame.Piece;
+import bordgame.Posicao;
 import chess.pieces.Rei;
 import chess.pieces.Torre;
 
@@ -25,6 +27,28 @@ public class ChessMatch {
 		}
 		return mat;
 	}
+	
+	public ChessPiece performChessMove(ChessPosition sourcePosition, ChessPosition targetPosition) {
+		Posicao source = sourcePosition.toPosition();
+		Posicao target = targetPosition.toPosition();
+		validateSourcePosition(source);
+		Piece capturedPiece = makeMove(source, target);
+		return (ChessPiece)capturedPiece;
+	}
+	
+	private Piece makeMove(Posicao source, Posicao target) {
+		Piece p = board.removePiece(source);
+		Piece capturedPiece = board.removePiece(target);
+		board.placePiece(p, target);
+		return capturedPiece;
+	}
+	
+	private void validateSourcePosition(Posicao posicao) {
+		if (!board.thereIsAPiece(posicao)) {
+			throw new ChessException("There is not piece on sours position");
+		}
+	}
+	
 	
 	private void placeNewPiece(char coluna, int linha, ChessPiece piece) {
 		board.placePiece(piece, new ChessPosition(coluna, linha).toPosition());
