@@ -43,7 +43,7 @@ public class Peao extends ChessPiece {
 				mat[p.getLinha()][p.getColuna()] = true;
 			}
 			p.setValues(posicao.getLinha() + 2, posicao.getColuna());
-			Posicao p2 = new Posicao(posicao.getLinha() - 1, posicao.getColuna());
+			Posicao p2 = new Posicao(posicao.getLinha() + 1, posicao.getColuna());
 			if (getBoard().positionExists(p) && !getBoard().thereIsAPiece(p) && getBoard().positionExists(p2)
 					&& !getBoard().thereIsAPiece(p2) && getMoveCount() == 0) {
 				mat[p.getLinha()][p.getColuna()] = true;
